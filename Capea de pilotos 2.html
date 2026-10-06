@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Capea de pilotos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF3F8;--ink:#10233F;--card:#fff;--line:#10233F;--accent:#B23A2E;--sig:#F2C230;--muted:#4a5b73;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1626;--ink:#EEF3F8;--card:#10233F;--line:#EEF3F8;--accent:#E0604F;--muted:#a9b8cc}}
+:root[data-theme="dark"]{--bg:#0B1626;--ink:#EEF3F8;--card:#10233F;--line:#EEF3F8;--accent:#E0604F;--muted:#a9b8cc}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 Figtree,system-ui,sans-serif}
+main{max-width:620px;margin:0 auto;padding:28px 20px 48px}
+h1{font:900 clamp(52px,17vw,92px)/.9 "Big Shoulders Display",Impact,sans-serif;margin:0 0 14px;letter-spacing:.5px}
+h1 span{color:var(--accent)}
+.lead{color:var(--muted);margin:0 0 28px;max-width:46ch}
+.pass{background:var(--card);border:2px solid var(--line);border-radius:14px;overflow:hidden}
+.pass .top{background:var(--ink);color:var(--bg);padding:12px 18px;font-weight:600;display:flex;justify-content:space-between}
+.pass .body{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:20px 18px}
+.f small{display:block;color:var(--muted);font-size:13px}
+.f b{font:800 28px/1.1 "Big Shoulders Display",Impact,sans-serif}
+.tear{border-top:2px dashed var(--line);padding:18px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--sig);color:#10233F;font-weight:600;font-size:18px;padding:14px 26px;border-radius:10px;text-decoration:none;border:2px solid #10233F}
+.btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.btn[aria-disabled=true]{opacity:.55;pointer-events:none}
+h2{font:800 30px/1 "Big Shoulders Display",Impact,sans-serif;margin:36px 0 10px}
+ul{padding-left:20px;margin:0}li{margin-bottom:8px}
+form{display:grid;gap:14px}
+label{display:grid;gap:4px;font-weight:600}
+input:not([type=checkbox]){font:inherit;padding:12px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);width:100%}
+input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.chk{grid-template-columns:auto 1fr;align-items:start;gap:10px;font-weight:400;font-size:15px}
+.chk input{width:22px;height:22px;margin-top:2px}
+form .btn{font-family:inherit;cursor:pointer}
+.err{color:var(--accent);font-weight:600;margin:0}
+.note{font-size:14px;color:var(--muted);margin-top:28px}
+</style>
+</head>
+<body>
+<main>
+<h1>Capea de <span>pilotos</span></h1>
+<p class="lead">Una capea única y exclusiva. Las entradas ya están a la venta y las plazas son limitadas.</p>
+
+<section class="pass" aria-label="Entrada">
+  <div class="top"><span>CAPEA DE PILOTOS</span><span>Entrada general</span></div>
+  <div class="body">
+    <div class="f"><small>Fecha</small><b>Sáb 7 nov</b></div>
+    <div class="f"><small>Hora</small><b>13:00</b></div>
+    <div class="f"><small>Lugar</small><b>Por confirmar</b></div>
+    <div class="f"><small>Precio</small><b>30 €</b></div>
+  </div>
+  <div class="tear">
+    <span class="f"><small>Fecha provisional, puede cambiar</small></span>
+    <a class="btn" href="#comprar">Comprar entrada</a>
+  </div>
+</section>
+
+<h2 id="comprar">Compra tu entrada</h2>
+<form id="f" novalidate>
+  <label>Nombre<input id="n" autocomplete="given-name" required></label>
+  <label>Apellidos<input id="a" autocomplete="family-name" required></label>
+  <label>Edad<input id="e" type="number" inputmode="numeric" min="17" max="99" required></label>
+  <label class="chk"><input id="c" type="checkbox" required>
+    <span>Entiendo y acepto que participo en la capea bajo mi propia responsabilidad, y que cualquier daño o lesión que pueda sufrir es responsabilidad mía y no de los organizadores.</span></label>
+  <p id="err" class="err" role="alert" hidden></p>
+  <button class="btn" type="submit">Continuar al pago</button>
+</form>
+
+<h2>Cómo funciona tu entrada</h2>
+<ul>
+  <li>Pagas online y el dinero llega directamente a la organización.</li>
+  <li>Recibes una entrada con tu nombre y un código QR único.</li>
+  <li>En la puerta se escanea el código: cada entrada solo vale una vez, así que una copia no sirve.</li>
+</ul>
+
+<p class="note">Organizado por los pilotos. Contacto: <a href="tel:+34667641229">667 641 229</a></p>
+</main>
+<script>
+// Cuando tengas el enlace de pago (Eventbrite, Stripe, etc.), pégalo aquí:
+var BUY_URL = "";
+var $ = function (i) { return document.getElementById(i); };
+$("f").addEventListener("submit", function (ev) {
+  ev.preventDefault();
+  var err = $("err"), msg = "";
+  if (!$("n").value.trim() || !$("a").value.trim()) msg = "Escribe tu nombre y apellidos.";
+  else if (!($("e").value >= 17)) msg = "Hay que tener 17 años o más para entrar.";
+  else if (!$("c").checked) msg = "Tienes que aceptar el consentimiento para continuar.";
+  else if (!BUY_URL) msg = "El pago aún no está activado. Contacta con la organización: 667 641 229.";
+  err.hidden = !msg; err.textContent = msg;
+  if (!msg) window.location.href = BUY_URL;
+});
+</script>
+</body>
+</html>
